@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SafeCross AI - Traffic Violation Monitoring System</title>
+        <link rel="stylesheet" href="style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+    </head>
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <i class="fas fa-traffic-light"></i>
+                    <span>SafeCross AI</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#demo">Live Demo</a></li>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>AI-Powered Pedestrian Crossing Safety</h1>
+                <p>
+                    Real-time monitoring of traffic violations at pedestrian
+                    crossings using computer vision and machine learning
+                </p>
+                <button class="cta-btn" onclick="showDemo()">
+                    View Live Demo
+                </button>
+            </div>
+            <div class="hero-image">
+                <div class="mockup">
+                    <div class="mockup-header">
+                        <div class="mockup-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="mockup-content">
+                        <div class="ai-detection">
+                            <div class="camera-feed"></div>
+                            <div class="detection-box"></div>
+                            <div class="violation-alert">
+                                VIOLATION DETECTED
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section id="how-it-works" class="section">
+            <h2>How SafeCross AI Works</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Real-Time Monitoring</h3>
+                    <p>AI analyzes CCTV footage at pedestrian crossings 24/7</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-car-burst"></i>
+                    </div>
+                    <h3>Violation Detection</h3>
+                    <p>Detects vehicles failing to stop for pedestrians</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-license-plate"></i>
+                    </div>
+                    <h3>License Plate Recognition</h3>
+                    <p>Automatically reads and records license plates</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-file-pen"></i>
+                    </div>
+                    <h3>Automated Reporting</h3>
+                    <p>Generates violation reports for authorities</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Demo Section - Simple 2-Part Layout -->
+        <section id="demo" class="section demo-section">
+            <div class="section-header">
+                <h2>
+                    <i class="fas fa-video"></i> AI Traffic Violation Detection
+                </h2>
+                <p class="section-subtitle">
+                    Upload traffic footage to see AI processing results
+                </p>
+            </div>
+
+            <div class="demo-grid">
+                <!-- Left: Upload Section -->
+                <div class="demo-column upload-column">
+                    <div class="column-header">
+                        <h3>
+                            <i class="fas fa-cloud-upload-alt"></i> 1. Upload
+                            Traffic Footage
+                        </h3>
+                    </div>
+
+                    <div
+                        class="upload-area"
+                        onclick="document.getElementById('fileInput').click()"
+                    >
+                        <div class="upload-icon">
+                            <i class="fas fa-file-video"></i>
+                        </div>
+                        <div class="upload-info">
+                            <h4>Drag & Drop or Click to Upload</h4>
+                            <p>Supported: MP4, MOV, AVI, JPG, PNG</p>
+                            <p class="file-size">Max file size: 100MB</p>
+                        </div>
+                        <input
+                            type="file"
+                            id="fileInput"
+                            accept="video/*,image/*"
+                            hidden
+                        />
+                        <button class="upload-btn">Choose File</button>
+                    </div>
+
+                    <div class="sample-options">
+                        <p class="sample-title">Quick test with samples:</p>
+                        <div class="sample-buttons">
+                            <button
+                                class="sample-btn"
+                                onclick="loadSample('busy')"
+                            >
+                                <i class="fas fa-road"></i>
+                                <span>Busy Crossing</span>
+                                <small>15 sec • 15.2 MB</small>
+                            </button>
+                            <button
+                                class="sample-btn"
+                                onclick="loadSample('school')"
+                            >
+                                <i class="fas fa-school"></i>
+                                <span>School Zone</span>
+                                <small>20 sec • 22.5 MB</small>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="file-preview" id="filePreview">
+                        <div class="preview-placeholder">
+                            <i class="fas fa-play-circle"></i>
+                            <p>Preview will appear here</p>
+                        </div>
+                    </div>
+
+                    <div class="processing-controls">
+                        <button
+                            class="process-btn"
+                            id="processBtn"
+                            onclick="processVideo()"
+                            disabled
+                        >
+                            <i class="fas fa-play"></i> Process with AI
+                        </button>
+                        <button class="reset-btn" onclick="resetAll()">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+
+                    <div class="processing-status">
+                        <div class="status-item">
+                            <span class="status-label">Status:</span>
+                            <span class="status-value" id="status">Ready</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">File:</span>
+                            <span class="status-value" id="fileName">None</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Results Section -->
+                <div class="demo-column results-column">
+                    <div class="column-header">
+                        <h3>
+                            <i class="fas fa-chart-bar"></i> 2. AI Detection
+                            Results
+                        </h3>
+                        <button class="download-btn" onclick="downloadReport()">
+                            <i class="fas fa-download"></i> Report
+                        </button>
+                    </div>
+
+                    <div class="results-display">
+                        <!-- Video Player with Actual Video Playback -->
+                        <div class="video-container">
+                            <div class="video-player" id="videoPlayer">
+                                <!-- Actual video element -->
+                                <video
+                                    id="outputVideo"
+                                    width="100%"
+                                    height="100%"
+                                    controls
+                                    style="display: none"
+                                >
+                                    Your browser does not support the video tag.
+                                </video>
+                                <img
+                                    id="outputImage"
+                                    width="100%"
+                                    height="100%"
+                                    style="display: none"
+                                />
+
+                                <!-- Static placeholder when no video is loaded -->
+                                <div
+                                    class="video-placeholder"
+                                    id="videoPlaceholder"
+                                >
+                                    <i class="fas fa-eye"></i>
+                                    <p>Processed video with AI detections</p>
+                                </div>
+
+                                <!-- Detection Overlays -->
+                                <div
+                                    class="detection-overlay"
+                                    id="detectionOverlay"
+                                    style="display: none"
+                                >
+                                    <!-- Detection boxes will be added here -->
+                                </div>
+                            </div>
+
+                            <div class="video-controls">
+                                <button
+                                    class="control-btn"
+                                    onclick="playVideo()"
+                                >
+                                    <i class="fas fa-play"></i> Play
+                                </button>
+                                <button
+                                    class="control-btn"
+                                    onclick="pauseVideo()"
+                                >
+                                    <i class="fas fa-pause"></i> Pause
+                                </button>
+                                <button
+                                    class="control-btn"
+                                    onclick="restartVideo()"
+                                >
+                                    <i class="fas fa-redo"></i> Restart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Results Summary -->
+                        <div class="results-summary">
+                            <div class="summary-row">
+                                <div class="summary-item">
+                                    <div class="summary-icon">
+                                        <i
+                                            class="fas fa-exclamation-triangle"
+                                        ></i>
+                                    </div>
+                                    <div class="summary-content">
+                                        <h5>Violations Detected</h5>
+                                        <div
+                                            class="summary-value"
+                                            id="violationsCount"
+                                        >
+                                            2
+                                        </div>
+                                        <p>Failure to yield</p>
+                                    </div>
+                                </div>
+
+                                <div class="summary-item">
+                                    <div class="summary-icon">
+                                        <i class="fas fa-car"></i>
+                                    </div>
+                                    <div class="summary-content">
+                                        <h5>Vehicles Tracked</h5>
+                                        <div
+                                            class="summary-value"
+                                            id="vehiclesCount"
+                                        >
+                                            8
+                                        </div>
+                                        <p>Cars: 6, Motorcycles: 2</p>
+                                    </div>
+                                </div>
+
+                                <div class="summary-item">
+                                    <div class="summary-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="summary-content">
+                                        <h5>Pedestrians</h5>
+                                        <div
+                                            class="summary-value"
+                                            id="pedestriansCount"
+                                        >
+                                            5
+                                        </div>
+                                        <p>Safe crossings: 4</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- License Plate Recognition -->
+                            <div class="license-section">
+                                <h5>
+                                    <i class="fas fa-license-plate"></i> License
+                                    Plates Recognized
+                                </h5>
+                                <div class="plate-grid">
+                                    <div class="plate-item violation">
+                                        <span class="plate-number"
+                                            >ABC-123</span
+                                        >
+                                        <span class="plate-status"
+                                            >Violation</span
+                                        >
+                                    </div>
+                                    <div class="plate-item violation">
+                                        <span class="plate-number"
+                                            >XYZ-789</span
+                                        >
+                                        <span class="plate-status"
+                                            >Violation</span
+                                        >
+                                    </div>
+                                    <div class="plate-item safe">
+                                        <span class="plate-number"
+                                            >DEF-456</span
+                                        >
+                                        <span class="plate-status">Safe</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Metrics -->
+                    <div class="ai-metrics">
+                        <div class="metric-item">
+                            <span class="metric-label">AI Accuracy:</span>
+                            <span class="metric-value" id="accuracy"
+                                >94.2%</span
+                            >
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Total Violations:</span>
+                            <span class="metric-value" id="totalViolations"
+                                >2</span
+                            >
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Last Updated:</span>
+                            <span class="metric-value" id="lastUpdate"
+                                >Just now</span
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section with Charts -->
+        <section id="dashboard" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-line"></i> Analytics Dashboard</h2>
+                <p class="section-subtitle">
+                    Sample data from pilot deployment - AI-powered insights
+                </p>
+            </div>
+
+            <div class="dashboard-container">
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Violations</h3>
+                            <div class="stat-number">1,247</div>
+                            <p class="stat-subtitle">Last 30 days</p>
+                            <div class="stat-trend trend-up">
+                                <i class="fas fa-arrow-up"></i> 12% from last
+                                month
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Peak Violation Time</h3>
+                            <div class="stat-number">8:30 AM</div>
+                            <p class="stat-subtitle">Morning rush hour</p>
+                            <div class="stat-trend">
+                                <i class="fas fa-car"></i> 68% occur 7-9 AM
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Most Dangerous Crossing</h3>
+                            <div class="stat-number">Main & 5th</div>
+                            <p class="stat-subtitle">42% of total violations</p>
+                            <div class="stat-trend trend-up">
+                                <i class="fas fa-exclamation-circle"></i> High
+                                risk zone
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Compliance Improvement</h3>
+                            <div class="stat-number">+37%</div>
+                            <p class="stat-subtitle">
+                                After system installation
+                            </p>
+                            <div class="stat-trend trend-down">
+                                <i class="fas fa-arrow-down"></i> 24% fewer
+                                accidents
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-grid">
+                    <!-- Chart 1: Violations Over Time -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h4>
+                                <i class="fas fa-chart-bar"></i> Violations Per
+                                Day (Last 30 Days)
+                            </h4>
+                            <select
+                                class="chart-filter"
+                                onchange="
+                                    updateChart('violationsChart', this.value)
+                                "
+                            >
+                                <option value="30">Last 30 Days</option>
+                                <option value="7">Last 7 Days</option>
+                                <option value="90">Last 90 Days</option>
+                            </select>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="violationsChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Chart 2: Time of Day Analysis -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h4>
+                                <i class="fas fa-clock"></i> Violations by Time
+                                of Day
+                            </h4>
+                            <select
+                                class="chart-filter"
+                                onchange="updateChart('timeChart', this.value)"
+                            >
+                                <option value="day">Daily</option>
+                                <option value="week">Weekly</option>
+                                <option value="month">Monthly</option>
+                            </select>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="timeChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Chart 3: Vehicle Types -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h4>
+                                <i class="fas fa-car"></i> Violations by Vehicle
+                                Type
+                            </h4>
+                            <div class="legend">
+                                <span class="legend-item"
+                                    ><span class="car-dot"></span> Cars</span
+                                >
+                                <span class="legend-item"
+                                    ><span class="truck-dot"></span>
+                                    Trucks</span
+                                >
+                                <span class="legend-item"
+                                    ><span class="motorcycle-dot"></span>
+                                    Motorcycles</span
+                                >
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="vehicleChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Chart 4: Location Heatmap -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h4>
+                                <i class="fas fa-map"></i> Violation Hotspots
+                            </h4>
+                            <div class="location-stats">
+                                <div class="location-stat">
+                                    <span class="location-name"
+                                        >Main & 5th:</span
+                                    >
+                                    <span class="location-value">42%</span>
+                                </div>
+                                <div class="location-stat">
+                                    <span class="location-name">Park Ave:</span>
+                                    <span class="location-value">28%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="locationChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Metrics -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h4>
+                            <i class="fas fa-percentage"></i> Detection Accuracy
+                        </h4>
+                        <div class="metric-progress">
+                            <div class="progress-label">
+                                <span>Overall Accuracy</span>
+                                <span>94.2%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div
+                                    class="progress-fill"
+                                    style="width: 94.2%"
+                                ></div>
+                            </div>
+                        </div>
+                        <div class="progress-details">
+                            <div class="detail-item">
+                                <span>Vehicle Detection</span>
+                                <span>96.5%</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>License Plate</span>
+                                <span>95.8%</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>Pedestrian Detection</span>
+                                <span>92.4%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <h4>
+                            <i class="fas fa-tachometer-alt"></i> System
+                            Performance
+                        </h4>
+                        <div class="performance-metrics">
+                            <div class="perf-item">
+                                <div class="perf-icon">
+                                    <i class="fas fa-video"></i>
+                                </div>
+                                <div class="perf-info">
+                                    <span class="perf-label"
+                                        >Cameras Active</span
+                                    >
+                                    <span class="perf-value">24/7</span>
+                                </div>
+                            </div>
+                            <div class="perf-item">
+                                <div class="perf-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div class="perf-info">
+                                    <span class="perf-label"
+                                        >Processing Speed</span
+                                    >
+                                    <span class="perf-value">24 fps</span>
+                                </div>
+                            </div>
+                            <div class="perf-item">
+                                <div class="perf-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="perf-info">
+                                    <span class="perf-label"
+                                        >System Uptime</span
+                                    >
+                                    <span class="perf-value">99.9%</span>
+                                </div>
+                            </div>
+                            <div class="perf-item">
+                                <div class="perf-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div class="perf-info">
+                                    <span class="perf-label"
+                                        >Response Time</span
+                                    >
+                                    <span class="perf-value">2.3s</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <h4>
+                            <i class="fas fa-calendar-check"></i> Recent
+                            Activity
+                        </h4>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-time">Today, 08:45</div>
+                                <div class="activity-desc">
+                                    5 violations at Main & 5th
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-time">
+                                    Yesterday, 17:30
+                                </div>
+                                <div class="activity-desc">
+                                    School zone enforcement active
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-time">
+                                    Yesterday, 08:15
+                                </div>
+                                <div class="activity-desc">
+                                    Peak violations: 42 incidents
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-time">2 days ago</div>
+                                <div class="activity-desc">
+                                    System maintenance completed
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact-section">
+            <h2>Request a Pilot Program</h2>
+
+            <div class="contact-container">
+                <form id="contactForm" onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Additional Information</label>
+                        <textarea id="message" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Submit Request
+                    </button>
+                </form>
+
+                <div class="contact-info">
+                    <h3>
+                        <i class="fas fa-info-circle"></i> Pilot Program Details
+                    </h3>
+                    <ul>
+                        <li>
+                            <i class="fas fa-check"></i> 3-month free pilot
+                            program
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> Installation at 5
+                            crossings
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> Full analytics
+                            dashboard
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> Technical support
+                            included
+                        </li>
+                    </ul>
+                    <div class="testimonial">
+                        <p>
+                            "SafeCross AI reduced pedestrian crossing violations
+                            by 68% in our test deployment."
+                        </p>
+                        <p class="author">- City Traffic Department</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>
+                SafeCross AI &copy; 2026 | MVP for Technological
+                Entrepreneurship Course
+            </p>
+            <p>
+                Team Members: Omirkyzy Danel, Zhaksylyk Amina. ST-2301 |
+                Instructor: Zhanna Zhassulankyzy
+            </p>
+        </footer>
+
+        <script src="script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </body>
+</html>
