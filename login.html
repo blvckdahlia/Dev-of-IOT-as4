@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SafeCross AI - Authorities Login</title>
+        <link rel="stylesheet" href="style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+    </head>
+    <body>
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <i class="fas fa-traffic-light"></i>
+                    <span>SafeCross AI</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html#home">Home</a></li>
+                    <li>
+                        <a href="login.html" class="active"
+                            >Authorities Login</a
+                        >
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Login Section -->
+        <section class="login-section">
+            <div class="login-container">
+                <!-- Left Panel - Login Form -->
+                <div class="login-panel">
+                    <div class="login-header">
+                        <h1>
+                            <i class="fas fa-shield-alt"></i> Authorities Portal
+                        </h1>
+                        <p class="login-subtitle">
+                            Secure access for traffic department officials
+                        </p>
+                    </div>
+
+                    <form id="loginForm" class="login-form">
+                        <div class="form-group">
+                            <label for="email">
+                                <i class="fas fa-envelope"></i> Official Email
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="name@traffic-department.gov"
+                                required
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">
+                                <i class="fas fa-lock"></i> Password
+                            </label>
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="••••••••••"
+                                required
+                            />
+                            <div
+                                class="password-toggle"
+                                onclick="togglePassword()"
+                            >
+                                <i class="fas fa-eye" id="toggleIcon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="remember" />
+                                <span class="checkmark"></span>
+                                Remember me
+                            </label>
+                            <a href="#" class="forgot-link">Forgot password?</a>
+                        </div>
+
+                        <button type="submit" class="login-btn">
+                            <i class="fas fa-sign-in-alt"></i> Login to
+                            Dashboard
+                        </button>
+
+                        <div class="divider">
+                            <span>or</span>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="secondary-btn"
+                            onclick="demoLogin()"
+                        >
+                            <i class="fas fa-eye"></i> View Demo Account
+                        </button>
+                    </form>
+
+                    <div class="login-info">
+                        <div class="info-card">
+                            <i class="fas fa-info-circle"></i>
+                            <p>
+                                This portal is restricted to authorized traffic
+                                department personnel only. Unauthorized access
+                                is prohibited.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel - Features -->
+                <div class="features-panel">
+                    <div class="features-header">
+                        <h2>
+                            <i class="fas fa-star"></i> Authorities Portal
+                            Features
+                        </h2>
+                        <p class="features-subtitle">
+                            Access comprehensive traffic monitoring tools
+                        </p>
+                    </div>
+
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Live Analytics Dashboard</h4>
+                                <p>Real-time violation statistics and trends</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-file-export"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Automated Report Generation</h4>
+                                <p>
+                                    Export violation data for enforcement
+                                    actions
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Multi-Camera Monitoring</h4>
+                                <p>View feeds from all active crossings</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Real-time Alerts</h4>
+                                <p>Get notified of critical violations</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-preview">
+                        <h4><i class="fas fa-chart-pie"></i> System Status</h4>
+                        <div class="stats-grid">
+                            <div class="stat">
+                                <span class="stat-label">Active Cameras</span>
+                                <span class="stat-value">24</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label"
+                                    >Today's Violations</span
+                                >
+                                <span class="stat-value">127</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">System Uptime</span>
+                                <span class="stat-value">99.9%</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Response Time</span>
+                                <span class="stat-value">2.1s</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-info">
+                        <h4><i class="fas fa-headset"></i> Need Help?</h4>
+                        <p>Contact SafeCross AI support:</p>
+                        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                        <p>
+                            <i class="fas fa-envelope"></i>
+                            support@safecross-ai.com
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>SafeCross AI &copy; 2026 | Official Traffic Monitoring System</p>
+            <p>Restricted Access - For Authorized Personnel Only</p>
+        </footer>
+
+        <!-- Success Modal -->
+        <div class="modal" id="successModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>
+                        <i class="fas fa-check-circle"></i> Login Successful
+                    </h3>
+                    <button class="modal-close" onclick="closeModal()">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="success-animation">
+                        <i class="fas fa-shield-check"></i>
+                    </div>
+                    <h4>Welcome to SafeCross AI Dashboard</h4>
+                    <p>
+                        You are now logged in as:
+                        <strong id="userEmail"></strong>
+                    </p>
+                    <p>Redirecting to authorities dashboard...</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-btn" onclick="redirectToDashboard()">
+                        <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+                        Now
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Modal -->
+        <div class="modal" id="errorModal">
+            <div class="modal-content error">
+                <div class="modal-header">
+                    <h3>
+                        <i class="fas fa-exclamation-triangle"></i> Login Failed
+                    </h3>
+                    <button class="modal-close" onclick="closeModal()">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="errorMessage">
+                        Invalid credentials. Please try again.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-btn" onclick="closeModal()">
+                        <i class="fas fa-redo"></i> Try Again
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script src="login.js"></script>
+    </body>
+</html>
